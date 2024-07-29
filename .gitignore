@@ -1,0 +1,7 @@
+# Ignore log file
+log.txt
+
+# Ignore compiled Java class files
+*.class
+
+.idea/
