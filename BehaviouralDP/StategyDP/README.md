@@ -1,57 +1,203 @@
-# Implementing the Strategy Design Pattern with Context Inheritance
+# Strategy Design Pattern
 
-You are tasked with creating a payment processing system that supports multiple payment methods (e.g., Credit Card, PayPal, and Bitcoin). Implement the Strategy design pattern to provide a flexible solution for choosing different payment algorithms at runtime. Additionally, the system should support different use cases (e.g., OnlinePayment, InStorePayment) by inheriting the `PaymentContext` class.
+The **Strategy** design pattern is a behavioral design pattern that enables selecting an algorithm's implementation at runtime. It defines a family of algorithms, encapsulates each algorithm in a separate class, and makes them interchangeable. This allows the client to choose an algorithm from a family of algorithms without altering the code that uses the algorithms.
 
-## Requirements
+## Key Components
 
-### PaymentStrategy Interface
-- Create a `PaymentStrategy` interface with a method `pay(double amount)`.
+1. **Strategy Interface**: Defines a common interface for all supported algorithms or strategies. It declares a method that all concrete strategies must implement.
 
-### Concrete Payment Strategies
-- Implement at least three classes that implement the `PaymentStrategy` interface:
-    - `CreditCardPayment`: Simulates payment processing via credit card.
-    - `PayPalPayment`: Simulates payment processing via PayPal.
-    - `BitcoinPayment`: Simulates payment processing via Bitcoin.
+2. **Concrete Strategies**: Specific implementations of the Strategy interface. Each class provides a different algorithm or behavior.
 
-### PaymentContext Class
-- Create a `PaymentContext` class that uses a `PaymentStrategy` to process payments.
-- Provide a method `setPaymentStrategy(PaymentStrategy strategy)` to change the payment strategy.
-- Provide a method `executePayment(double amount)` to process the payment using the current strategy.
+3. **Context**: Maintains a reference to a Strategy object and uses it to execute the algorithm. The Context can switch strategies dynamically at runtime.
 
-### Inherit PaymentContext
-- Create different classes for various use cases by inheriting the `PaymentContext` class:
-    - `OnlinePaymentContext`: Specific to online payment processing.
-    - `InStorePaymentContext`: Specific to in-store payment processing.
-    - `MobilePaymentContext`: Specific to mobile payment processing.
-- Each subclass can have additional methods or properties specific to the use case.
+## Benefits
 
-### Testing
-- Create a test class `StrategyTest` that demonstrates the use of different payment strategies and different payment contexts by changing them at runtime.
+- **Flexibility**: Allows changing algorithms or behaviors at runtime without modifying the client code.
+- **Encapsulation**: Encapsulates the algorithm implementation, keeping it separate from the client code.
+- **Open/Closed Principle**: New strategies can be added without changing existing code, adhering to the open/closed principle.
 
-## Example Usage
+## Example: Payment Processing System
+
+Imagine a payment processing system for an online shopping cart. We want to allow users to pay using different methods, such as credit cards, PayPal, or bank transfers. We’ll use the Strategy pattern to encapsulate each payment method as a separate strategy.
+
+### UML Diagram
+```plaintext
++------------------+      +------------------------+
+| PaymentStrategy  |<-----| ConcreteStrategies     |
++------------------+      +------------------------+
+| + pay(amount: int)|      | + pay(amount: int)     |
++------------------+      +------------------------+
+         ^                  | + CreditCardStrategy   |
+         |                  | + PaypalStrategy       |
+         |                  | + BankTransferStrategy |
+         |                  +------------------------+
+         |
++------------------+ 
+| ShoppingCart     | 
++------------------+
+| - items: List<Item> |
+| + addItem(item: Item) |
+| + removeItem(item: Item) |
+| + calculateTotal(): int |
+| + pay(strategy: PaymentStrategy) |
++------------------+
+         |
++------------------+
+| Item             |
++------------------+
+| - name: String   |
+| - price: int     |
+| + getName(): String |
+| + getPrice(): int  |
++------------------+
+
+```
+### 1. Strategy Interface
+
+Define a common interface for all payment strategies:
 
 ```java
-public class main.java.com.example.library.Main {
-    public static void main(String[] args) {
-        // Online payment context with different strategies
-        PaymentContext onlineContext = new OnlinePaymentContext();
-        onlineContext.setPaymentStrategy(new CreditCardPayment());
-        onlineContext.executePayment(100.0);
+interface PaymentStrategy {
+    void pay(int amount);
+}
+```
+### 2. Concrete Strategies
+Implement various payment strategies:
 
-        onlineContext.setPaymentStrategy(new PayPalPayment());
-        onlineContext.executePayment(200.0);
+```java
+// Payment via Credit Card
+class CreditCardStrategy implements PaymentStrategy {
+private String cardNumber;
 
-        // In-store payment context with different strategies
-        PaymentContext inStoreContext = new InStorePaymentContext();
-        inStoreContext.setPaymentStrategy(new BitcoinPayment());
-        inStoreContext.executePayment(300.0);
+    public CreditCardStrategy(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
 
-        inStoreContext.setPaymentStrategy(new CreditCardPayment());
-        inStoreContext.executePayment(400.0);
-
-        // Mobile payment context with different strategies
-        PaymentContext mobileContext = new MobilePaymentContext();
-        mobileContext.setPaymentStrategy(new PayPalPayment());
-        mobileContext.executePayment(500.0);
+    @Override
+    public void pay(int amount) {
+        System.out.println(amount + " paid using Credit Card.");
     }
 }
+
+// Payment via PayPal
+class PaypalStrategy implements PaymentStrategy {
+private String emailId;
+
+    public PaypalStrategy(String emailId) {
+        this.emailId = emailId;
+    }
+
+    @Override
+    public void pay(int amount) {
+        System.out.println(amount + " paid using PayPal.");
+    }
+}
+
+// Payment via Bank Transfer
+class BankTransferStrategy implements PaymentStrategy {
+private String accountNumber;
+
+    public BankTransferStrategy(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+    @Override
+    public void pay(int amount) {
+        System.out.println(amount + " paid using Bank Transfer.");
+    }
+}
+```
+### 3. Context
+Create a class that uses the strategy for payment processing:
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+class ShoppingCart {
+private List<Item> items;
+
+    public ShoppingCart() {
+        items = new ArrayList<>();
+    }
+
+    public void addItem(Item item) {
+        items.add(item);
+    }
+
+    public void removeItem(Item item) {
+        items.remove(item);
+    }
+
+    public int calculateTotal() {
+        int sum = 0;
+        for (Item item : items) {
+            sum += item.getPrice();
+        }
+        return sum;
+    }
+
+    public void pay(PaymentStrategy paymentMethod) {
+        int amount = calculateTotal();
+        paymentMethod.pay(amount);
+    }
+}
+
+class Item {
+private String name;
+private int price;
+
+    public Item(String name, int price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+}
+```
+### 4. Client Code
+Use the ShoppingCart with different payment strategies:
+
+```java
+public class StrategyPatternDemo {
+public static void main(String[] args) {
+ShoppingCart cart = new ShoppingCart();
+
+        Item item1 = new Item("Laptop", 1000);
+        Item item2 = new Item("Mouse", 50);
+
+        cart.addItem(item1);
+        cart.addItem(item2);
+
+        // Pay using Credit Card
+        PaymentStrategy creditCard = new CreditCardStrategy("1234567890123456");
+        cart.pay(creditCard);
+
+        // Pay using PayPal
+        PaymentStrategy paypal = new PaypalStrategy("myemail@example.com");
+        cart.pay(paypal);
+
+        // Pay using Bank Transfer
+        PaymentStrategy bankTransfer = new BankTransferStrategy("987654321");
+        cart.pay(bankTransfer);
+    }
+}
+```
+## Explanation
+
+- **Strategy Interface (`PaymentStrategy`)**: This interface declares the `pay()` method that all concrete strategies must implement.
+
+- **Concrete Strategies (`CreditCardStrategy`, `PaypalStrategy`, `BankTransferStrategy`)**: Each class provides a specific implementation of the `pay()` method, representing different payment methods.
+
+- **Context (`ShoppingCart`)**: This class uses the `PaymentStrategy` to handle payments. It maintains a list of items and calculates the total amount. The `pay()` method delegates the payment process to the strategy object.
+
+- **Client Code**: The `StrategyPatternDemo` class demonstrates how to use different payment methods with the `ShoppingCart`. The `pay()` method of `ShoppingCart` accepts a `PaymentStrategy` object, allowing the payment method to be changed at runtime.
+
+## Summary
+
+The Strategy pattern is effective in scenarios where multiple algorithms or behaviors are needed, and the choice of algorithm needs to be made at runtime. By encapsulating each algorithm in a separate class and using a common interface, the Strategy pattern promotes flexibility, maintainability, and adherence to the open/closed principle. It allows clients to select and switch strategies easily, making the system adaptable to changes and new requirements.
