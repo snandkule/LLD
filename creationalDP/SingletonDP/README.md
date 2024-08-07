@@ -27,7 +27,7 @@ You are tasked with creating a logging utility for an application that ensures o
 ## Example Usage
 
 ```java
-public class main.java.com.example.library.Main {
+public class main.java.com.example.library.java.com.example.editor.Main {
     public static void main(String[] args) {
         Logger logger = Logger.getInstance();
         logger.log("Application started.");

@@ -32,7 +32,7 @@ You are tasked with creating a UI component library that supports different them
 ## Example Usage
 
 ```java
-public class main.java.com.example.library.Main {
+public class main.java.com.example.library.java.com.example.editor.Main {
     public static void main(String[] args) {
         UIFactory factory = getThemeFactory("DARK");
         Button button = factory.createButton();

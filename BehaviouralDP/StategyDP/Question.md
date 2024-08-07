@@ -31,7 +31,7 @@ You are tasked with creating a payment processing system that supports multiple 
 ## Example Usage
 
 ```java
-public class main.java.com.example.library.Main {
+public class main.java.com.example.library.java.com.example.editor.Main {
     public static void main(String[] args) {
         // Online payment context with different strategies
         PaymentContext onlineContext = new OnlinePaymentContext();
