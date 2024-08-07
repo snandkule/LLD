@@ -1,10 +1,10 @@
-import BookPackage.IBook;
-import userPackage.Iuser;
+package main.java.com.example.library;
+
+import main.java.com.example.library.BookPackage.IBook;
+import main.java.com.example.library.userPackage.Iuser;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Library {
     List<IBook> books;

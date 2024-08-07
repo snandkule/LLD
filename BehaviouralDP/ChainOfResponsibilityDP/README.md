@@ -27,7 +27,7 @@ You are tasked with creating a request processing system that can handle various
 ## Example Usage
 
 ```java
-public class Main {
+public class main.java.com.example.library.Main {
     public static void main(String[] args) {
         // Setup chain of handlers
         Handler authHandler = new AuthenticationHandler();

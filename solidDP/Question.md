@@ -1,4 +1,4 @@
-# Exercise: Library Management System
+# Exercise: main.java.com.example.library.Library Management System
 
 ## Scenario
 You need to design a library management system where users can borrow books, return books, and check the status of books. The system should be flexible and extensible, allowing for new types of users and books without changing existing code.
@@ -15,7 +15,7 @@ You need to design a library management system where users can borrow books, ret
 - `PrintedBook` has a physical location.
 - `Ebook` has a digital format and can be downloaded.
 
-### Library Operations
+### main.java.com.example.library.Library Operations
 - Users can borrow and return books.
 - The system should keep track of which books are currently borrowed by which users.
 - The system should check the availability of books and the borrowing limit for users.

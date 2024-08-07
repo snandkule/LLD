@@ -32,7 +32,7 @@ You are tasked with creating a system for constructing complex `Computer` object
 ## Example Usage
 
 ```java
-public class Main {
+public class main.java.com.example.library.Main {
     public static void main(String[] args) {
         Computer gamingPC = new ComputerBuilder()
             .setCPU("Intel Core i9")

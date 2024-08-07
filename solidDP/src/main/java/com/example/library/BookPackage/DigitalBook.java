@@ -1,4 +1,4 @@
-package BookPackage;
+package main.java.com.example.library.BookPackage;
 
 public class DigitalBook implements IBook{
     private int id;

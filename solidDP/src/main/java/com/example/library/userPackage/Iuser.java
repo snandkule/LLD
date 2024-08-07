@@ -1,6 +1,6 @@
-package userPackage;
+package main.java.com.example.library.userPackage;
 
-import BookPackage.IBook;
+import main.java.com.example.library.BookPackage.IBook;
 
 import java.util.List;
 

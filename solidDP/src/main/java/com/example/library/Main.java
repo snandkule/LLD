@@ -1,9 +1,11 @@
-import BookPackage.DigitalBook;
-import BookPackage.IBook;
-import BookPackage.PrintedBook;
-import userPackage.Iuser;
-import userPackage.PremiumUser;
-import userPackage.RegularUser;
+package main.java.com.example.library;
+
+import main.java.com.example.library.BookPackage.DigitalBook;
+import main.java.com.example.library.BookPackage.IBook;
+import main.java.com.example.library.BookPackage.PrintedBook;
+import main.java.com.example.library.userPackage.Iuser;
+import main.java.com.example.library.userPackage.PremiumUser;
+import main.java.com.example.library.userPackage.RegularUser;
 
 public class Main {
     public static void main(String[] args) {

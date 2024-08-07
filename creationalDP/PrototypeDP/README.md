@@ -24,7 +24,7 @@ You are tasked with creating a system for managing shapes in a graphic design ap
 ## Example Usage
 
 ```java
-public class Main {
+public class main.java.com.example.library.Main {
     public static void main(String[] args) {
         ShapeRegistry registry = new ShapeRegistry();
 

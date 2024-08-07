@@ -1,21 +1,18 @@
-package userPackage;
+package main.java.com.example.library.userPackage;
 
-import BookPackage.IBook;
+import main.java.com.example.library.BookPackage.IBook;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RegularUser implements Iuser{
+public class PremiumUser implements Iuser{
     private int id;
     private String name;
     private List<IBook> borrowedBooks;
 
-    private final int MAX_NO_OF_BOOKS_BORROW_LIMIT = 5;
-    private int currBooksBorrowCount;
-    public RegularUser(int id, String name){
+    public PremiumUser(int id, String name){
         this.id = id;
         this.name = name;
-        this.currBooksBorrowCount = 0;
         this.borrowedBooks = new ArrayList<>();
     }
     @Override
@@ -30,7 +27,7 @@ public class RegularUser implements Iuser{
 
     @Override
     public boolean canBorrow() {
-    return currBooksBorrowCount< MAX_NO_OF_BOOKS_BORROW_LIMIT;
+        return true;
     }
 
     @Override
@@ -47,4 +44,5 @@ public class RegularUser implements Iuser{
     public void removeBorrowedBook(IBook book){
         this.borrowedBooks.remove(book);
     }
+
 }

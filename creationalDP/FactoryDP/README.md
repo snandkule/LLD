@@ -27,7 +27,7 @@ You are tasked with creating a notification system that can send different types
 ## Example Usage
 
 ```java
-public class Main {
+public class main.java.com.example.library.Main {
     public static void main(String[] args) {
         Notification email = NotificationFactory.createNotification("EMAIL");
         email.send("This is an email message.");
