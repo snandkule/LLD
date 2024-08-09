@@ -78,8 +78,8 @@ To get started with the repository:
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/your-username/Low-Level-System-Design.git
-   cd Low-Level-System-Design
+   git clone https://github.com/snandkule/LLD.git
+   cd LLD
 
 ### Navigate through Sections:
 - Explore the folders for Behavioural, Structural, and Creational design patterns.
